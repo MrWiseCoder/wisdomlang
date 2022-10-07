@@ -1,0 +1,76 @@
+const str name = "wisdom";
+print $"hello from {name}";
+
+
+void main(int argc, str[] argv) {
+    int k = 5;
+    int *l -> k;
+    int m = 4;
+    int ptr n = &m;
+    printf("Run %d \n", topla());
+    echo "m:" m ", n:" n;
+    println("k => {}", k);
+    writeln("k => ", k);
+}
+
+// this is a comment damn!
+
+int topla() {
+    int a = 3;
+    int b = 4;
+    auto c = 3 + 4;
+    return c;
+}
+
+int add(int x, int y) {
+    return x + y;
+}
+
+void swap(int ptr x, int ptr y) {
+    int temp = ~x;
+    ~x = ~y;
+    ~y = temp;
+}
+
+main();
+
+void ptr f = &topla;
+void ptr f2 -> add;
+
+call topla;
+run add 2 7;
+
+show(
+    f(),
+    f2(4, 5),
+    )
+
+int xx = 5;
+int yy = 4;
+
+template T sum(T[] l) {
+    for i in l {
+        result += i;
+    }
+}
+
+/* go swap xx yy; */
+/* goto swap xx yy; */
+/* go2 swap xx yy; */
+
+/* jump swap xx yy; */
+
+/*
+void myfunc() {
+    int a = 4;
+    int ptr b -> a;
+    echo ~b | int c;
+    %cat "input.txt" | str d;
+    add 3 4 | int e;
+    echo $ add 2 3 | str f;
+}
+
+int add(int x, int y) {
+    return x + y;
+}
+*/

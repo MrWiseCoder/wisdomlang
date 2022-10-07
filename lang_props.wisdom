@@ -1,0 +1,265 @@
+/**
+ *
+ * Clean Coders aka Robert C. Martin aka Uncle Bob
+ * *** Code composed from those 3 below ***
+ * sequence
+ * selection
+ * iteration
+ * *************************
+ *
+ * #s = subroutine
+ * #p = procedure
+ * #f = function
+ * #read_file(filepath, content) =
+    subroutine read_file_into_content(filepath: string, content: ptr to string) = 
+        ct:ptr -> content
+        let size: size_t = ct.size
+        var fp:FILE ptr -> fopen(filepath, "r")
+        if !fp: fprintf("error", stderr); exit(1)
+        fgets(fp, ct)
+        fclose((fp) // also fine => fp.fclose
+        free(fp) // same as => fp.free
+**/
+
+// one line comment
+
+alias sub = subroutine
+alias func = function
+alias fn = function
+alias proc = procedure
+
+defer fp.close
+
+#macro read_file (filepath, content) {
+    void read_file_into_content(str filepath, str ptr content) {
+        str ptr ct -> content;
+        let {
+            size_t size = ct.size;
+        } 
+        FILE ptr fp -> fopen(filepath, "r");
+        if !fp => fprintf("error", stderr); exit(1);
+        fgets(fp, ct);
+        fclose(fp); // also fine => fp.fclose
+        free(fp); // same as => fp.free
+    }
+}
+
+#preprocess {
+    ADAM 32
+    KADIN 50
+}
+
+#include <stdio.h>
+#include "mylib.h"
+
+import something
+from package import that
+
+
+table mytable {
+    columns: ["name", "age"];
+    rows: [
+        ["ado", 34],
+        ["ozi", 22]
+    ];
+}
+
+struct student {
+    str name;
+    int age;
+}
+
+type stu = struct student;
+
+typedef struct node {
+    variant val;
+    node left;
+    node right;
+}
+
+class animal {
+    void init(self, name, age) => standart;
+    void bark(self) {
+        print "hav";
+    } 
+} 
+        
+option get_or_die() {
+    return Option(some="some string", none=null);
+}
+
+void somefunc(ref int a) {
+    a++;
+    echo ~a;
+}
+
+void somefunc2(int ptr a) {
+    a++;
+    echo ~a;
+}
+
+int rec fact(int n) {
+    if n <= 1 {
+        return 1;
+    } else {
+        return n * fact(n - 1);
+    }
+}
+
+struct student ptr create_struct(str name, int age) {
+    struct student ptr mystudent = malloc(sizeof struct student);
+    mystudent -> {name: name, age: age};
+    mystudent
+}
+
+void main(int argc, str[] argv) {
+    var somevar;
+    somevar = 2;
+    somevar = "ado";
+    auto some2 = (str) somevar;
+    auto ado1 = create_struct("adnan", "30");
+    variant ado2 = create_struct "adnan" "30";
+    create_struct "adnan" "30" | auto ado;
+    defer free ado;
+    with ado as a {
+        print a.name a.age;
+    }
+    auto dog = new animal("daisy", 12);
+    auto dog2 = animal.new("daisy", 12);
+    auto dog3 = animal.new "daisy" 12;
+    dog.bark;
+    print ADAM;
+    const int a = 4;        /* immutable */
+    long d;                 /* implicit mutable */
+    mut long md;             /* explicit mutable */
+    let {                   /* defining more than one variable*/
+        float b = 5.0;
+        auto c = a * b;
+    }
+    int ptr x -> a;
+    int ptr x2 = &a;
+    let {
+        y -> b;
+        auto z = &c;
+    } 
+    echo "a =>" a;
+    echo "~x =>" ~x;
+    echo "~z =>" deref z;
+    echo "b = ${b}";
+    echo $ typeof b;
+    echo $ sizeof z;
+    echo $ addressof a;
+    scanf "%d" &d;
+    short e <|;
+    e |>;
+    add 3 5 | int data1;
+    add 2 3 | add 7 | add 10 | int data;
+    lazy block {
+        str m <| %cat "input.txt";
+        float n = 4.56;
+    }
+    echo $ add 3 5 | str data1;
+    echo $ add 2 4 |> "output.txt";
+    %cat "input.txt" | str data2;
+    echo "deneme" | %tee "output2.txt" | str data3;
+    printf "Data3 %s " data3;
+    str k = a.str;
+    str[] l = data3.list;
+    echo "k =>" k;
+    echo "l =>" l;
+    sum $ take 3 [4, 7, 2, 99, 32] | echo;
+    echo "Sum:: " $ sum $ take 3 [4, 7, 2, 99, 32];
+    foreach [2, 3, 5] as i {
+        print i;
+    }
+    if a < b {
+        echo "1";
+    }
+    elif b < a {
+        echo "2";
+    }
+    else {
+        echo "=";
+    }
+    return a + b;
+}
+
+main;
+
+export animal
+
+int main2(int argc, str[] argv) {
+    echo "naber";
+    str whole_content;
+    #read_file("somefile.txt", &whole_content);
+    str contents = whole_content.list;
+    return 0;
+}
+
+/* function get_this(): ?(string int) =  */
+/*     return a is not None ? a : b */
+
+/* fn get_ptr_to_int(): -> int = */
+/*     i:ptr to int */
+
+let rec sum = func x:xs => x + f xs
+
+eager block {
+    auto data = get_data;
+    object fun = &sum;
+}
+
+/**
+ * take dicts, comprehensions from py
+ * get layziness and functional programming ideas from haskell (and ocaml)
+ * use memory stuff from c
+ * need to steal lot of ideas from d (uffi, classes, structs, unittest)
+ * copy string manipulation properties from perl
+ * macros like rust and d
+ * coroutines like go routines!
+**/
+
+/**
+ * important reserved keywords (as ideas)
+ * context (like globals in python)
+ * dir (same as python)
+ * typeof (like type in python)
+ * type (like type in nim or typedef in c)
+ * sizeof (same as c)
+ * standart stuff like function, for, if, else, elif, switch-case, continue, break
+ * const, let, var, type infer is ok but better to right types with ':' 
+ * defer (same as zig)
+ * comments like in c
+ * pointers => p: ptr to int -> an_integer
+ * echo to print stuff
+ * printf and fprintf for historical reasons
+ * print like python
+ * #println() like println! in Rust
+ * piping data like so: echo "deneme" | data:string
+                        run | data:int
+ * or to a file like so: echo "naber" |> $file_path
+                         echo "dur bi" |>> $file_path
+ * and, or, not instead of || && ! (this is mostly about syntax though)
+ * %cat file.txt | data:string
+ * calling functions
+    add 3 5
+    add(3, 5)
+    [3, 5].add
+ * sequences => sets, tuples, lists, arrays, vectors (or dataframes)
+ * private, protected, public like php
+ * interface, metaclasses
+ * mod, export, modules, import, from
+ * where syntax like haskell
+ * option type like rust
+ * use '?' to return options from funcs
+ * this and self keywords?
+ * id() like py
+ * None or null? or undefined? 
+ * is operator to check objects
+ * thread programming and asyncio, await
+ * ! to indicate importance or precedence
+ * debugging stuff
+ * ide ideas
+ * code map, memory map
+ * match statements like rust
+**/

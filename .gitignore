@@ -1,0 +1,9 @@
+# Folders
+build/
+dist/
+release/
+debug/
+
+# Files
+a.out
+main
