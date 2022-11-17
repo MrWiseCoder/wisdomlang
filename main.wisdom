@@ -7,6 +7,8 @@ void main(int argc, str[] argv) {
     int *l -> k;
     int m = 4;
     int ptr n = &m;
+    int *n = &m;
+    int ptr n -> m;
     printf("Run %d \n", topla());
     echo "m:" m ", n:" n;
     println("k => {}", k);
